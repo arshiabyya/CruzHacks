@@ -11,7 +11,6 @@ interface Club {
   description: string;
 }
 
-// Explicitly type the component
 const Index = (): JSX.Element => {
   const [clubs, setClubs] = useState<Club[]>([]);
 
@@ -19,7 +18,7 @@ const Index = (): JSX.Element => {
     fetch('http://localhost:5000/api/clubs')
       .then(res => res.json())
       .then(data => {
-        console.log(data); // 👀 Make sure it logs in console
+        console.log(data);
         setClubs(data);
       });
   }, []);

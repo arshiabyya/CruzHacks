@@ -15,7 +15,6 @@ const ClubCard = ({ club }: ClubCardProps) => {
   return (
     <div className="club-card">
       <div className="card-header">
-        <div className="card-avatar">A</div>
         <div className="card-title">
           <h3>{club.title}</h3>
           <p>{club.topic}</p>

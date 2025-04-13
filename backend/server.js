@@ -4,11 +4,6 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-// Routers
-const patientsRouter = require('./routes/patients');
-const doctorsRouter = require('./routes/doctors');
-const appointmentsRouter = require('./routes/appointments');
-
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -80,12 +75,6 @@ app.post('/api/clubs', async (req, res) => {
       res.status(500).json({ message: 'Server error' });
     }
   });
-  
-
-// Other routes
-app.use('/patients', patientsRouter);
-app.use('/doctors', doctorsRouter);
-app.use('/appointments', appointmentsRouter);
 
 // Start server
 app.listen(PORT, () => {

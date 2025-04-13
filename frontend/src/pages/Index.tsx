@@ -1,24 +1,40 @@
-
-import React from 'react';
+import React, { JSX, useEffect, useState } from 'react';
 import Header from '../components/Header';
 import ClubCard from '../components/ClubCard';
 
-const Index = () => {
-  // Sample club data
-  const clubs = [
-    { id: 1, title: 'Club', topic: 'Topic', event: 'Event', location: 'Location', description: 'Description' },
-    { id: 2, title: 'Club', topic: 'Topic', event: 'Event', location: 'Location', description: 'Description' },
-    { id: 3, title: 'Club', topic: 'Topic', event: 'Event', location: 'Location', description: 'Description' },
-    { id: 4, title: 'Club', topic: 'Topic', event: 'Event', location: 'Location', description: 'Description' },
-  ];
+interface Club {
+  _id: string;
+  title: string;
+  topic: string;
+  event: string;
+  location: string;
+  description: string;
+}
+
+// Explicitly type the component
+const Index = (): JSX.Element => {
+  const [clubs, setClubs] = useState<Club[]>([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/clubs')
+      .then(res => res.json())
+      .then(data => {
+        console.log(data); // 👀 Make sure it logs in console
+        setClubs(data);
+      });
+  }, []);
 
   return (
     <div className="app-container">
       <Header />
       <main className="club-grid">
-        {clubs.map((club) => (
-          <ClubCard key={club.id} club={club} />
-        ))}
+        {clubs.length > 0 ? (
+          clubs.map((club) => (
+            <ClubCard key={club._id} club={club} />
+          ))
+        ) : (
+          <p>Loading clubs...</p>
+        )}
       </main>
     </div>
   );

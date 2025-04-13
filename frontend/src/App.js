@@ -1,38 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Header from './components/Header.js';
-import ClubCard from './components/ClubCard.js';
-import AddEvent from './pages/AddEvent.js';
 
+// Explicitly add file extensions
+import Header from './components/Header.tsx';  // Added .tsx
+import ClubCard from './components/ClubCard.tsx';  // Added .tsx
+import AddEvent from './pages/AddEvent.tsx';  // Added .tsx
 
 function App() {
-  // Sample club data
-  const clubs = [
-    { id: 1, title: 'Club', topic: 'Topic', event: 'Event', location: 'Location', description: 'Description' },
-    { id: 2, title: 'Club', topic: 'Topic', event: 'Event', location: 'Location', description: 'Description' },
-    { id: 3, title: 'Club', topic: 'Topic', event: 'Event', location: 'Location', description: 'Description' },
-    { id: 4, title: 'Club', topic: 'Topic', event: 'Event', location: 'Location', description: 'Description' },
-    { id: 5, title: 'Club', topic: 'Topic', event: 'Event', location: 'Location', description: 'Description' },
-    { id: 6, title: 'Club', topic: 'Topic', event: 'Event', location: 'Location', description: 'Description' },
-    { id: 7, title: 'Club', topic: 'Topic', event: 'Event', location: 'Location', description: 'Description' },
-    { id: 8, title: 'Club', topic: 'Topic', event: 'Event', location: 'Location', description: 'Description' },
-  ];
+  const [clubs, setClubs] = useState([]);
+
+  useEffect(() => {
+    // Fetch data from your backend
+    fetch('http://localhost:5000/api/clubs')
+      .then((res) => res.json())
+      .then((data) => setClubs(data))
+      .catch((err) => console.error('Error fetching clubs:', err));
+  }, []);
 
   return (
     <Router>
       <Routes>
         <Route path="/add-event" element={<AddEvent />} />
-        <Route path="/" element={
-          <div className="app-container">
-            <Header />
-            <main className="club-grid">
-              {clubs.map((club) => (
-                <ClubCard key={club.id} club={club} />
-              ))}
-            </main>
-          </div>
-        } />
+        <Route
+          path="/"
+          element={
+            <div className="app-container">
+              <Header />
+              <main className="club-grid">
+                {clubs.length > 0 ? (
+                  clubs.map((club) => (
+                    <ClubCard key={club._id} club={club} />
+                  ))
+                ) : (
+                  <p>Loading clubs...</p>
+                )}
+              </main>
+            </div>
+          }
+        />
       </Routes>
     </Router>
   );

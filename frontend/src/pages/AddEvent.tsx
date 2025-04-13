@@ -31,7 +31,7 @@ const AddEvent = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted'); // Check if this logs when clicking "Post"
+    console.log('Form submitted');
 
     fetch('http://localhost:5000/api/clubs', {
       method: 'POST',
@@ -62,9 +62,8 @@ const AddEvent = () => {
     });
   };
 
-  // Sample club data for preview
   const previewClub = {
-    _id: 'placeholder-id',  // Add a placeholder _id here
+    _id: 'placeholder-id',
     title: formData.club || 'Club',
     topic: 'Category',
     event: formData.event || 'Event',

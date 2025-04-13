@@ -76,7 +76,31 @@ app.post('/api/clubs', async (req, res) => {
     }
   });
 
-// Start server
+  app.delete('/api/clubs/:id', async (req, res) => {
+  console.log('Received DELETE request for club ID:', req.params.id); // Log the incoming request
+
+  try {
+    const clubId = req.params.id;  // Get the club ID from the URL parameters
+    console.log('Deleting club with ID:', clubId); // Log to make sure the correct ID is received
+
+    // Attempt to delete the club by its ID
+    const deletedClub = await Club.findByIdAndDelete(clubId);  // This is where the deletion happens
+
+    if (!deletedClub) {
+      return res.status(404).json({ message: 'Club not found' });  // If the club doesn't exist
+    }
+
+    console.log('Club deleted successfully:', deletedClub); // Log successful deletion
+    res.status(200).json({ message: 'Club deleted successfully' });  // Send success response
+  } catch (error) {
+    console.error('Error deleting club:', error);  // Log any errors
+    res.status(500).json({ message: 'Error deleting club' });  // Send error response
+  }
+});
+
+  
+  
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

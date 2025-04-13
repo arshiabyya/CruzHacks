@@ -1,0 +1,272 @@
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background: linear-gradient(184.1deg, rgba(249,255,182,1) 44.7%, rgba(226,255,172,1) 67.2%);
+}
+
+/* Header styles */
+.main-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.main-header h1 {
+  font-size: 2.5rem;
+  color: #444;
+  margin-bottom: 1rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  display: inline-block;
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1rem auto;
+  max-width: 500px;
+  background-color: white;
+  border-radius: 25px;
+  padding: 0.25rem;
+}
+
+.nav-btn {
+  background-color: transparent;
+  border: none;
+  padding: 0.75rem 1rem;
+  flex: 1;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-decoration: none;
+  color: #333;
+  border-radius: 20px;
+}
+
+.nav-btn:hover, .nav-btn.active {
+  background-color: #6c5ce7;
+  color: white;
+}
+
+/* Club grid layout */
+.club-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+/* Club card styling */
+.club-card {
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: #f8e8fa;
+}
+
+.card-avatar {
+  width: 28px;
+  height: 28px;
+  background-color: #d670e7;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+  font-weight: bold;
+}
+
+.card-title {
+  flex: 1;
+}
+
+.card-title h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.card-title p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #555;
+}
+
+.card-image {
+  height: 160px;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder-image {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder-image::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-bottom: 50px solid #aaa;
+  margin-bottom: 10px;
+}
+
+.placeholder-image::after {
+  content: "";
+  display: flex;
+  gap: 10px;
+}
+
+.card-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.event-info h4 {
+  margin: 0 0 0.25rem 0;
+  color: #8e44ad;
+  font-size: 0.9rem;
+}
+
+.event-info p {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.description {
+  margin: 0 0 1rem 0;
+  font-size: 0.8rem;
+  color: #666;
+  flex: 1;
+}
+
+.open-btn {
+  align-self: flex-end;
+  background-color: #6c5ce7;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 0.4rem 1.2rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.open-btn:hover {
+  background-color: #5d4fcf;
+}
+
+/* Add Event Page Styles */
+.add-event-container {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  flex-wrap: wrap;
+}
+
+.form-container {
+  flex: 1;
+  min-width: 300px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.form-title {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.cancel-button {
+  background-color: white;
+  color: #333;
+}
+
+.post-button {
+  background-color: #6c5ce7;
+}
+
+.preview-container {
+  min-width: 280px;
+  flex: 0.8;
+}
+
+@media (max-width: 768px) {
+  .add-event-container {
+    flex-direction: column;
+  }
+  
+  .preview-container {
+    order: -1;
+  }
+  
+  .club-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .club-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .nav-buttons {
+    flex-direction: column;
+    border-radius: 15px;
+  }
+  
+  .nav-btn {
+    border-radius: 12px;
+  }
+}

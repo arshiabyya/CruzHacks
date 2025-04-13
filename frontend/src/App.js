@@ -2,16 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
-// Explicitly add file extensions
-import Header from './components/Header.tsx';  // Added .tsx
-import ClubCard from './components/ClubCard.tsx';  // Added .tsx
-import AddEvent from './pages/AddEvent.tsx';  // Added .tsx
+import Header from './components/Header.tsx';
+import ClubCard from './components/ClubCard.tsx';
+import AddEvent from './pages/AddEvent.tsx';
 
 function App() {
   const [clubs, setClubs] = useState([]);
 
   useEffect(() => {
-    // Fetch data from your backend
     fetch('http://localhost:5000/api/clubs')
       .then((res) => res.json())
       .then((data) => setClubs(data))

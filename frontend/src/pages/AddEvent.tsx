@@ -2,18 +2,26 @@ import React, { useState } from 'react';
 import { Button } from '../components/ui/button.js';
 import { Input } from '../components/ui/input.js';
 import { Textarea } from '../components/ui/textarea.js';
-import Header from '../components/Header.js';
-import ClubCard from '../components/ClubCard.js';
+import Header from '../components/Header.tsx';
+import ClubCard from '../components/ClubCard.tsx';  // Correct the extension to .tsx
+
+// Define the type for the form data
+interface FormData {
+  club: string;
+  event: string;
+  description: string;
+  location: string;
+}
 
 const AddEvent = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     club: '',
     event: '',
     description: '',
     location: '',
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prevData => ({
       ...prevData,
@@ -21,10 +29,28 @@ const AddEvent = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically submit the data to a server
-    console.log('Form submitted:', formData);
+    console.log('Form submitted'); // Check if this logs when clicking "Post"
+
+    fetch('http://localhost:5000/api/clubs', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('Form submitted successfully:', data);
+        setFormData({
+          club: '',
+          event: '',
+          description: '',
+          location: '',
+        });
+      })
+      .catch((error) => console.error('Error submitting form:', error));
   };
 
   const handleCancel = () => {
@@ -38,6 +64,7 @@ const AddEvent = () => {
 
   // Sample club data for preview
   const previewClub = {
+    _id: 'placeholder-id',  // Add a placeholder _id here
     title: formData.club || 'Club',
     topic: 'Category',
     event: formData.event || 'Event',

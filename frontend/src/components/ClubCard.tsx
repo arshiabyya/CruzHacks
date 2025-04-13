@@ -1,7 +1,17 @@
-
 import React from 'react';
 
-const ClubCard = ({ club }) => {
+interface ClubCardProps {
+  club: {
+    _id: string;
+    title: string;
+    topic: string;
+    event: string;
+    location: string;
+    description: string;
+  };
+}
+
+const ClubCard = ({ club }: ClubCardProps) => {
   return (
     <div className="club-card">
       <div className="card-header">
